@@ -3,23 +3,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t takatakayone/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t takayone615/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true takatakayone/react-test npm test -- --coverage
+  - docker run -e CI=true takayone615/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t takatakayone/multi-client ./client
-  - docker build -t takatakayone/multi-nginx ./nginx
-  - docker build -t takatakayone/multi-server ./server
-  - docker build -t takatakayone/multi-worker ./worker
+  - docker build -t takayone615/multi-client ./client
+  - docker build -t takayone615/multi-nginx ./nginx
+  - docker build -t takayone615/multi-server ./server
+  - docker build -t takayone615/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push takatakayone/multi-client
-  - docker push takatakayone/multi-nginx
-  - docker push takatakayone/multi-server
-  - docker push takatakayone/multi-worker
+  - docker push takayone615/multi-client
+  - docker push takayone615/multi-nginx
+  - docker push takayone615/multi-server
+  - docker push takayone615/multi-worker
 #
 #deploy:
 #  provider: elasticbeanstalk
